@@ -108,12 +108,12 @@ pnpm preview # 빌드 결과 미리보기
 <div markdown="1">
 
 ```js
-import { defineConfig } from "vite";
+import { defineConfig } from 'vite';
 
 /\*_ @type {import('vite').UserConfig} _/;
 export default defineConfig({
   server: {
-    host: "localhost",
+    host: 'localhost',
     port: 3000,
   },
   preview: {
@@ -153,18 +153,18 @@ pnpm add @vitejs/plugin-react -D
 <div markdown="1">
 
 ```js
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 /\*_ @type {import('vite').UserConfig} _/;
 export default defineConfig({
   plugins: [
     react({
-      jsxRuntime: "automatic",
+      jsxRuntime: 'automatic',
     }),
   ],
   server: {
-    host: "localhost",
+    host: 'localhost',
     port: 3000,
   },
   preview: {
@@ -326,24 +326,24 @@ pnpm add eslint-plugin-react-{refresh,hooks} eslint-plugin-jsx-a11y -D
 <div markdown="1">
 
 ```js
-import js from "@eslint/js";
-import globals from "globals";
-import tseslint from "typescript-eslint";
-import react from "eslint-plugin-react";
-import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
-import jsxA11y from "eslint-plugin-jsx-a11y";
+import js from '@eslint/js';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 
 export default tseslint.config(
   {
-    ignores: ["dist"],
+    ignores: ['dist'],
   },
   {
-    files: ["**/*.{ts,tsx}"],
+    files: ['**/*.{ts,tsx}'],
     ...jsxA11y.flatConfigs.recommended,
     settings: {
       react: {
-        version: "19.0.0",
+        version: '19.0.0',
       },
     },
     languageOptions: {
@@ -353,7 +353,7 @@ export default tseslint.config(
         ...globals.node,
       },
       parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
         tsconfigRootDir: import.meta.dirname,
         ecmaFeatures: { jsx: true },
       },
@@ -367,21 +367,21 @@ export default tseslint.config(
     ],
     plugins: {
       react,
-      "react-hooks": reactHooks,
-      "react-refresh": reactRefresh,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
     },
     rules: {
       ...react.configs.flat.recommended.rules,
-      ...react.configs["jsx-runtime"].rules,
+      ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
-      "@typescript-eslint/no-unsafe-assignment": "off",
-      "@typescript-eslint/no-unsafe-call": "off",
-      "react-refresh/only-export-components": [
-        "warn",
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      'react-refresh/only-export-components': [
+        'warn',
         { allowConstantExport: true },
       ],
     },
-  },
+  }
 );
 ```
 
@@ -456,5 +456,58 @@ package.json
 ```
 "scripts": {
   "format": "prettier --cache src"
+}
+```
+
+## 절대 경로 수정
+
+Vite 프로젝트에서 절대 경로(absolute path)를 사용하려면 resolve.alias 설정이 필요
+
+<details>
+<summary>vite.config.ts</summary>
+<div markdown="1">
+
+```
+import { fileURLToPath } from 'node:url';
+
+export default defineConfig({
+	// ...
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+});
+```
+
+```
+import * as path from 'node:path';
+
+export default defineConfig({
+	// ...
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+});
+```
+
+</div>
+</details>
+
+하지만 VS Code는 @ 별칭 절대 경로에 대한 정보가 없으므로 정상적인 파일 탐색이 되지않음.
+문제 해결을 위해 tsconfig.app.json 파일에 다음 구성을 추가해 VS Code에서 파일 탐색이 가능하도록 설정
+
+tsconfig.app.json
+
+```
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
 }
 ```
