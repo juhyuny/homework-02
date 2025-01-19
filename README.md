@@ -511,3 +511,51 @@ tsconfig.app.json
   }
 }
 ```
+
+## Husky
+
+허스키는 푸시 할 때 린팅, 테스트 등을 수행하여 Git 커밋을 향상시키는데 도움을 주는 도구
+
+설치 및 자동 구성
+husky-init 명령을 사용해 프로젝트에 허스키를 손쉽게 자동 구성
+
+```
+pnpm add husky -D
+pnpm exec husky init
+```
+
+## lint-staged
+
+설치
+
+```
+pnpm add lint-staged -D
+```
+
+구성
+
+`package.json` 파일에 `lint-staged` 항목을 추가하고, 사전에 설정한 린팅, 포멧팅 명령을 설정
+
+package.json
+
+```json
+"lint-staged": {
+  "src/**/*.{ts,tsx}": [
+    "pnpm lint",
+    "pnpm format"
+  ]
+}
+```
+
+pre-commit 훅
+
+pre-commit 파일을 작성한 뒤 pnpm lint-staged 명령을 입력하면 커밋하기 전 린팅, 포멧팅을 수행합니다.
+
+.husky/pre-commit
+
+```
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
+
+pnpm lint-staged
+```

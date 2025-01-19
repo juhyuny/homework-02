@@ -4,10 +4,9 @@
   "version": "1.0.0",
   "description": "react 학습 후 과제를 수행하는 레포지토리",
   "engines": {
-    "node": ">=22.12.0",
+    "node": ">=22.0.0",
     "vscode": ">=1.9.0",
-    "npm": ">=9.0.0",
-    "pnpm": "8.10.2"
+    "npm": ">=9.0.0"
   },
   "scripts": {
     "start": "pnpm dev --open",
@@ -15,7 +14,14 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint --cache 'src/**/*.{ts,tsx}'",
-    "format": "prettier --cache src"
+    "format": "prettier --write --cache src",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "pnpm format",
+      "pnpm lint"
+    ]
   },
   "devDependencies": {
     "@types/react": "^19.0.7",
@@ -24,6 +30,8 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.18",
+    "husky": "9.1.7",
+    "lint-staged": "15.4.1",
     "prettier": "^3.4.2",
     "typescript": "^5.7.3",
     "vite": "^6.0.7"
