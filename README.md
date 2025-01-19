@@ -178,3 +178,110 @@ export default defineConfig({
 
 플러그인이 설정되면 이제 import React from 'react' 구문은 생략
 main.jsx
+
+## Typescript 구성
+
+typescript 패키지 설치
+
+```
+pnpm add typescript -D
+```
+
+## Typescript 구성 파일
+
+tsconfig.json + 파일에 참조(references)하는 2개의 JSON 파일
+
+<details>
+<summary>tsconfig.json</summary>
+<div markdown="1">
+
+```json
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>tsconfig.app.json</summary>
+<div markdown="1">
+
+React 앱 개발에 사용된 src 폴더의 TypeScript 파일 컴파일에 사용
+
+```json
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* 번들러 모드 */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* 린팅 */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src"]
+}
+```
+
+</div>
+</details>
+
+<details>
+<summary>tsconfig.node.json</summary>
+<div markdown="1">
+
+tsconfig.node.json 설정은 vite.config.ts 파일 컴파일에 사용
+
+```json
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* 번들러 모드 */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* 린팅 */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["vite.config.ts"]
+}
+```
+
+</div>
+</details>

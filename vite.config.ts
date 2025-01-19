@@ -1,5 +1,12 @@
 import { defineConfig } from "vite";
-const viteConfig = defineConfig({
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [
+    react({
+      jsxRuntime: "automatic",
+    }),
+  ],
   server: {
     host: "localhost",
     port: 3000,
@@ -9,4 +16,3 @@ const viteConfig = defineConfig({
     port: 8080,
   },
 });
-export default viteConfig;
