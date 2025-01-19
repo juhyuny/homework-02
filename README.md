@@ -285,3 +285,14 @@ tsconfig.node.json 설정은 vite.config.ts 파일 컴파일에 사용
 
 </div>
 </details>
+
+## Client 타입 정의 참조
+
+TypeScript 파일에서 이미지, 폰트, 스타일시트 파일 등을 불러오려 시도하면 오류가 발생
+이미지, 폰트, 스타일시트 파일에 대한 타입 정의가 필요
+
+vite-env.d.ts
+
+```
+/// <reference types="vite/client" />
+```
