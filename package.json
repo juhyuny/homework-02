@@ -1,28 +1,36 @@
 {
-  "private": true,
-  "type": "module",
-  "name": "likelion-vite-react",
+  "private": "true",
+  "name": "react-assignment",
   "version": "1.0.0",
-  "description": "Vite 빌드 도구를 사용해 React 개발 환경을 자동 스캐폴드하는 템플릿",
+  "description": "react 학습 후 과제를 수행하는 레포지토리",
+  "type": "module",
   "engines": {
-    "node": ">=22.0.0",
+    "node": ">=22.12.0",
+    "vscode": ">=1.9.0",
     "npm": ">=9.0.0",
-    "vscode": ">=1.9.0"
+    "pnpm": "8.10.2"
   },
   "scripts": {
     "start": "pnpm dev --open",
     "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint --cache 'src/**/*.{ts,tsx}'",
+    "format": "prettier --cache 'src/**/*.{ts,tsx}'"
   },
   "devDependencies": {
-    "@types/react": "19.0.7",
-    "@types/react-dom": "19.0.3",
-    "@vitejs/plugin-react": "4.3.4",
-    "typescript": "5.7.3",
-    "vite": "6.0.7"
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.18",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7"
   },
   "dependencies": {
+    "eslint": "^9.18.0",
     "react": "19",
     "react-dom": "19"
   }

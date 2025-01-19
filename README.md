@@ -296,3 +296,106 @@ vite-env.d.ts
 ```
 /// <reference types="vite/client" />
 ```
+
+## ESLint 린팅 구성
+
+- [eslint](https://npmjs.com/package/eslint)
+- [globals](https://npmjs.com/package/globals)
+- [@eslint/js](https://npmjs.com/package/@eslint/js)
+- [typescript-eslint](https://npmjs.com/package/typescript-eslint)
+- [eslint-plugin-react](https://npmjs.com/package/eslint-plugin-react)
+
+```
+pnpm create @eslint/config@latest
+```
+
+## ESLint 플러그인 추가 구성
+
+- [eslint-plugin-react-refresh](https://www.npmjs.com/package/eslint-plugin-react-refresh)
+- [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks)
+- [eslint-plugin-jsx-a11y](https://www.npmjs.com/package/eslint-plugin-jsx-a11y)
+
+```
+pnpm add eslint-plugin-react-{refresh,hooks} eslint-plugin-jsx-a11y -D
+```
+
+설치한 플러그인 설정을 eslint.config.js 파일에 추가
+
+<details>
+<summary>eslint.config.js</summary>
+<div markdown="1">
+
+```js
+import js from "@eslint/js";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
+import jsxA11y from "eslint-plugin-jsx-a11y";
+
+export default tseslint.config(
+  {
+    ignores: ["dist"],
+  },
+  {
+    files: ["**/*.{ts,tsx}"],
+    ...jsxA11y.flatConfigs.recommended,
+    settings: {
+      react: {
+        version: "19.0.0",
+      },
+    },
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+      parserOptions: {
+        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
+        tsconfigRootDir: import.meta.dirname,
+        ecmaFeatures: { jsx: true },
+      },
+    },
+  },
+  {
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.recommendedTypeChecked,
+      ...tseslint.configs.stylisticTypeChecked,
+    ],
+    plugins: {
+      react,
+      "react-hooks": reactHooks,
+      "react-refresh": reactRefresh,
+    },
+    rules: {
+      ...react.configs.flat.recommended.rules,
+      ...react.configs["jsx-runtime"].rules,
+      ...reactHooks.configs.recommended.rules,
+      "@typescript-eslint/no-unsafe-assignment": "off",
+      "@typescript-eslint/no-unsafe-call": "off",
+      "react-refresh/only-export-components": [
+        "warn",
+        { allowConstantExport: true },
+      ],
+    },
+  },
+);
+```
+
+</div>
+</details>
+
+## ESLint 린팅 명령 추가
+
+```
+"scripts": {
+  "lint": "eslint --cache src"
+}
+```
+
+```
+pnpm lint
+```
