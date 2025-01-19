@@ -16,7 +16,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint --cache 'src/**/*.{ts,tsx}'",
-    "format": "prettier --cache 'src/**/*.{ts,tsx}'"
+    "format": "prettier --cache src"
   },
   "devDependencies": {
     "@types/react": "^19.0.7",
