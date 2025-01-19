@@ -4,7 +4,7 @@ vite-react-ts
 
 ## 템플릿 폴더 생성
 
-```
+```bash
 mkdir <템플릿_폴더_이름>
 ```
 
@@ -12,7 +12,7 @@ mkdir <템플릿_폴더_이름>
 
 프로젝트 버전 관리를 위한 Git 초기화(initialization) 명령을 사용
 
-```
+```bash
 git init
 ```
 
@@ -73,13 +73,14 @@ package.json
 
 vite 패키지를 개발 종속성 모듈로 설치
 
-```
+```bash
 pnpm add vite -D
 ```
 
 <details>
 <summary>애플리케이션 개발 서버 구동, 빌드, 빌드 결과 미리보기 NPM 스크립트 명령어를 추가</summary>
 <div markdown="1">
+
 ```json
 "scripts": {
   "start": "pnpm dev --open",
@@ -88,12 +89,13 @@ pnpm add vite -D
   "preview": "vite preview"
 }
 ```
+
 </div>
 </details>
 
 서버 구동, 빌드, 미리보기
 
-```
+```bash
 pnpm dev # 애플리케이션 개발 서버 구동
 pnpm build # 애플리케이션 빌드
 pnpm preview # 빌드 결과 미리보기
@@ -104,29 +106,36 @@ pnpm preview # 빌드 결과 미리보기
 <details>
 <summary>vite.config.js</summary>
 <div markdown="1">
-```
-import { defineConfig } from 'vite';
 
-/\*_ @type {import('vite').UserConfig} _/
+```js
+import { defineConfig } from "vite";
+
+/\*_ @type {import('vite').UserConfig} _/;
 export default defineConfig({
-server: {
-host: 'localhost',
-port: 3000,
-},
-preview: {
-port: 8080
-}
+  server: {
+    host: "localhost",
+    port: 3000,
+  },
+  preview: {
+    port: 8080,
+  },
 });
-
 ```
+
 </div>
 </details>
 
-```
-
+```bash
 pnpm dev # 개발 서버 구동
 pnpm preview # 프리뷰 서버 구동
 
 ```
 
+## React & React DOM 구성
+
+react, react-dom 패키지 개발 종속성 모듈로 설치
+
+```bash
+pnpm add react@19 react-dom@19
+pnpm add @types/{react,react-dom} -D # 타입 정의
 ```
