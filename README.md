@@ -139,3 +139,42 @@ react, react-dom 패키지 개발 종속성 모듈로 설치
 pnpm add react@19 react-dom@19
 pnpm add @types/{react,react-dom} -D # 타입 정의
 ```
+
+## React 플러그인 구성
+
+프로젝트 @vitejs/plugin-react 플러그인 설치
+
+```
+pnpm add @vitejs/plugin-react -D
+```
+
+<details>
+<summary>vite.config.js</summary>
+<div markdown="1">
+
+```js
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+/\*_ @type {import('vite').UserConfig} _/;
+export default defineConfig({
+  plugins: [
+    react({
+      jsxRuntime: "automatic",
+    }),
+  ],
+  server: {
+    host: "localhost",
+    port: 3000,
+  },
+  preview: {
+    port: 8080,
+  },
+});
+```
+
+</div>
+</details>
+
+플러그인이 설정되면 이제 import React from 'react' 구문은 생략
+main.jsx
