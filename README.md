@@ -1,5 +1,7 @@
 # 커스텀 템플릿 구성
 
+vite-react-ts
+
 ## 템플릿 폴더 생성
 
 ```
@@ -60,3 +62,9 @@ root = true
 	trim_trailing_whitespace = false
 	insert_final_newline = false
 ```
+
+## 메타 데이터
+
+패키지 매니저를 사용해 프로젝트를 관리하기 위한 메타 데이터 파일을 작성
+package.json
+.npmrc
