@@ -68,3 +68,65 @@ root = true
 패키지 매니저를 사용해 프로젝트를 관리하기 위한 메타 데이터 파일을 작성
 package.json
 .npmrc
+
+## Vite 설치
+
+vite 패키지를 개발 종속성 모듈로 설치
+
+```
+pnpm add vite -D
+```
+
+<details>
+<summary>애플리케이션 개발 서버 구동, 빌드, 빌드 결과 미리보기 NPM 스크립트 명령어를 추가</summary>
+<div markdown="1">
+```json
+"scripts": {
+  "start": "pnpm dev --open",
+  "dev": "vite --host",
+  "build": "vite build",
+  "preview": "vite preview"
+}
+```
+</div>
+</details>
+
+서버 구동, 빌드, 미리보기
+
+```
+pnpm dev # 애플리케이션 개발 서버 구동
+pnpm build # 애플리케이션 빌드
+pnpm preview # 빌드 결과 미리보기
+```
+
+## Vite 구성파일
+
+<details>
+<summary>vite.config.js</summary>
+<div markdown="1">
+```
+import { defineConfig } from 'vite';
+
+/\*_ @type {import('vite').UserConfig} _/
+export default defineConfig({
+server: {
+host: 'localhost',
+port: 3000,
+},
+preview: {
+port: 8080
+}
+});
+
+```
+</div>
+</details>
+
+```
+
+pnpm dev # 개발 서버 구동
+pnpm preview # 프리뷰 서버 구동
+
+```
+
+```
