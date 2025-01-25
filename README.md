@@ -512,6 +512,8 @@ tsconfig.app.json
 }
 ```
 
+Node.js 프로젝트에서 TypeScript를 사용
+
 ```
 pnpm add @types/node -D
 ```
