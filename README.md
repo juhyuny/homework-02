@@ -512,6 +512,10 @@ tsconfig.app.json
 }
 ```
 
+```
+pnpm add @types/node -D
+```
+
 ## Husky
 
 허스키는 푸시 할 때 린팅, 테스트 등을 수행하여 Git 커밋을 향상시키는데 도움을 주는 도구
